@@ -136,7 +136,7 @@ end
 local stealBtn = createModernButton(mainContent, "ขโมย(มีโอกาสได้)", UDim2.new(0, 0, 0, 0))
 local floatBtn = createModernButton(mainContent, "ลอย", UDim2.new(0, 0, 0, 50))
 local freecamBtn = createModernButton(mainContent, "กล้อง📷", UDim2.new(0, 0, 0, 100))
-local antikickBtn = createModernButton(mainContent, "autu kick (อย่าใช้บัค)", UDim2.new(0, 0, 0, 150))
+local antikickBtn = createModernButton(mainContent, "auto kick (อย่าใช้บัค)", UDim2.new(0, 0, 0, 150))
 local godmodeBtn = createModernButton(mainContent, "God mode", UDim2.new(0, 0, 0, 200))
 
 -- ESP Tab Button
