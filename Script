@@ -39,7 +39,7 @@ local titleLabel = Instance.new("TextLabel", titleBar)
 titleLabel.Size = UDim2.new(1, -55, 1, 0)
 titleLabel.Position = UDim2.new(0, 15, 0, 0)
 titleLabel.BackgroundTransparency = 1
-titleLabel.Text = "czwuyi hub"
+titleLabel.Text = "czwuyi hub V.1"
 titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 titleLabel.Font = Enum.Font.GothamBold
 titleLabel.TextSize = 18
@@ -80,8 +80,8 @@ local function createModernTab(parent, text, position)
     return tab
 end
 
-local mainTab = createModernTab(tabFrame, "หน้าแรกค้าบ", UDim2.new(0, 0, 0, 0))
-local espTab = createModernTab(tabFrame, "แสดง?", UDim2.new(0.33, 3, 0, 0))
+local mainTab = createModernTab(tabFrame, "หน้าแรก", UDim2.new(0, 0, 0, 0))
+local espTab = createModernTab(tabFrame, "Eps", UDim2.new(0.33, 3, 0, 0))
 local moreTab = createModernTab(tabFrame, "เพิ่มเติม", UDim2.new(0.66, 6, 0, 0))
 
 -- Content Frames for each tab - adjusted height to fit optimized frame
@@ -133,18 +133,18 @@ local function createModernButton(parent, text, position, size)
 end
 
 -- Main Tab Buttons with tighter spacing
-local stealBtn = createModernButton(mainContent, "ขโมยจริงไหมไม่รู้ (works randomly)", UDim2.new(0, 0, 0, 0))
+local stealBtn = createModernButton(mainContent, "ขโมย(มีโอกาสได้)", UDim2.new(0, 0, 0, 0))
 local floatBtn = createModernButton(mainContent, "ลอย", UDim2.new(0, 0, 0, 50))
-local freecamBtn = createModernButton(mainContent, "มุมมองลอย", UDim2.new(0, 0, 0, 100))
-local antikickBtn = createModernButton(mainContent, "ออโต้เตะ", UDim2.new(0, 0, 0, 150))
-local godmodeBtn = createModernButton(mainContent, "พระเจ้ามาแล้วจ้า", UDim2.new(0, 0, 0, 200))
+local freecamBtn = createModernButton(mainContent, "กล้อง📷", UDim2.new(0, 0, 0, 100))
+local antikickBtn = createModernButton(mainContent, "autu kick (อย่าใช้บัค)", UDim2.new(0, 0, 0, 150))
+local godmodeBtn = createModernButton(mainContent, "God mode", UDim2.new(0, 0, 0, 200))
 
 -- ESP Tab Button
-local espBtn = createModernButton(espContent, "แสดงคนร้ายๆ", UDim2.new(0, 0, 0, 0))
+local espBtn = createModernButton(espContent, "แสดงชื่อ Player", UDim2.new(0, 0, 0, 0))
 
 -- More Tab Buttons with tighter spacing
-local analyzeBtn = createModernButton(moreContent, "กุไม่รู้ทำไร", UDim2.new(0, 0, 0, 0))
-local serverhopBtn = createModernButton(moreContent, "หาเซิดฝพ", UDim2.new(0, 0, 0, 50)) -- Reduced spacing from 60 to 50
+local analyzeBtn = createModernButton(moreContent, "ชื่อคนรวยที่สุดในเซิพของมึง", UDim2.new(0, 0, 0, 0))
+local serverhopBtn = createModernButton(moreContent, "รีเซิพ", UDim2.new(0, 0, 0, 50)) -- Reduced spacing from 60 to 50
 
 -- Credits label in More tab - moved up to eliminate space
 local creditsLabel = Instance.new("TextLabel", moreContent)
@@ -202,7 +202,7 @@ moreTab.MouseButton1Click:Connect(function() switchTab("More") end)
 -- STEAL BUTTON FUNCTIONALITY
 stealBtn.MouseButton1Click:Connect(function()
     local originalText = stealBtn.Text
-    stealBtn.Text = "กำลังขโมย?"
+    stealBtn.Text = "กำลังขโมยคับ โปรดรอ.."
     stealBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
     
     local char = player.Character
@@ -247,7 +247,7 @@ floatBtn.MouseButton1Click:Connect(function()
     if floatOn then
         if floatForce then floatForce:Destroy() end
         floatBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        floatBtn.Text = "ลอย?"
+        floatBtn.Text = "ลอย"
     else
         floatForce = Instance.new("BodyVelocity")
         floatForce.Velocity = Vector3.new(0, 20, 0)
@@ -255,7 +255,7 @@ floatBtn.MouseButton1Click:Connect(function()
         floatForce.P = 1000
         floatForce.Parent = root
         floatBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-        floatBtn.Text = "ลอยมั่ง"
+        floatBtn.Text = "ปิดลอย"
     end
     floatOn = not floatOn
 end)
@@ -268,7 +268,7 @@ end)
 -- ANTI-KICK FUNCTIONALITY
 antikickBtn.MouseButton1Click:Connect(function()
     local originalText = antikickBtn.Text
-    antikickBtn.Text = "รอเด้อ"
+    antikickBtn.Text = "รอ.."
     antikickBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
     
     pcall(function()
@@ -276,7 +276,7 @@ antikickBtn.MouseButton1Click:Connect(function()
     end)
     
     task.wait(1)
-    antikickBtn.Text = "กูไม่รู้"
+    antikickBtn.Text = "บัคอยู่"
     antikickBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
 end)
 
@@ -307,7 +307,7 @@ godmodeBtn.MouseButton1Click:Connect(function()
         end)
         
         -- Visual feedback
-        godmodeBtn.Text = "เปิดโหมดพระเจ้า49"
+        godmodeBtn.Text = "เปิดโหมดแล้ว🤡"
         godmodeBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
     else
         -- Disable god mode
@@ -315,7 +315,7 @@ godmodeBtn.MouseButton1Click:Connect(function()
         humanoid.Health = 100
         
         -- Visual feedback
-        godmodeBtn.Text = "พระเจ้าลงมาหาพ่อง"
+        godmodeBtn.Text = "Godmode"
         godmodeBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     end
 end)
@@ -357,13 +357,13 @@ espBtn.MouseButton1Click:Connect(function()
     espOn = not espOn
     if espOn then
         espBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-        espBtn.Text = "เปิดแสดงละไอไก่"
+        espBtn.Text = "เปิดแล้ว"
         for _, p in pairs(Players:GetPlayers()) do
             createESPForPlayer(p)
         end
     else
         espBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        espBtn.Text = "แสดงผู้เล่นมั่งนะ"
+        espBtn.Text = "แสดงชื่อ player"
         clearAllESP()
     end
 end)
@@ -383,10 +383,10 @@ analyzeBtn.MouseButton1Click:Connect(function()
         end
     end
     if richest then
-        analyzeBtn.Text = "หาคนรวย55: " .. richest.Name
+        analyzeBtn.Text = "player ที่รวย : " .. richest.Name
         analyzeBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
     else
-        analyzeBtn.Text = "ไม่พบ"
+        analyzeBtn.Text = "ไม่เจอ player"
         analyzeBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
     end
     
@@ -399,7 +399,7 @@ end)
 -- SERVER HOP FUNCTIONALITY
 local function serverHop()
     local originalText = serverhopBtn.Text
-    serverhopBtn.Text = "กำลังหา."
+    serverhopBtn.Text = "โปรดรอ.."
     serverhopBtn.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
     
     local function getServers()
