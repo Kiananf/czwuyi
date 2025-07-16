@@ -4,7 +4,7 @@ local TweenService = game:GetService("TweenService")
 local CoreGui = game:GetService("CoreGui")
 local TeleportService = game:GetService("TeleportService")
 local HttpService = game:GetService("HttpService")
-local Workspace = game:GetService("Workspace")
+local Workspace = game:GetService("Workspace") -- Added for ESP 2
 
 local player = Players.LocalPlayer 
 local playerGui = player:WaitForChild("PlayerGui")
@@ -14,16 +14,16 @@ screenGui.Name = "HurryGUI"
 screenGui.ResetOnSpawn = false
 screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
--- Main frame properties
+-- Increased main frame width to accommodate new tab
 local mainFrame = Instance.new("Frame", screenGui)
-mainFrame.Size = UDim2.new(0, 420, 0, 430) -- Increased height to accommodate new buttons in Main tab
+mainFrame.Size = UDim2.new(0, 420, 0, 380) -- Increased width to accommodate 4 tabs
 mainFrame.Position = UDim2.new(0, 20, 0, 20)
 mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 mainFrame.BorderSizePixel = 0
 local mainCorner = Instance.new("UICorner", mainFrame)
 mainCorner.CornerRadius = UDim.new(0, 16)
 
--- Purple border for aesthetic
+-- Purple border
 local purpleBorder = Instance.new("Frame", mainFrame)
 purpleBorder.Position = UDim2.new(0, -2, 0, -2)
 purpleBorder.Size = UDim2.new(1, 4, 1, 4)
@@ -32,7 +32,6 @@ purpleBorder.ZIndex = -1
 local borderCorner = Instance.new("UICorner", purpleBorder)
 borderCorner.CornerRadius = UDim.new(0, 18)
 
--- Title bar
 local titleBar = Instance.new("Frame", mainFrame)
 titleBar.Size = UDim2.new(1, 0, 0, 45)
 titleBar.BackgroundTransparency = 1
@@ -41,13 +40,12 @@ local titleLabel = Instance.new("TextLabel", titleBar)
 titleLabel.Size = UDim2.new(1, -55, 1, 0)
 titleLabel.Position = UDim2.new(0, 15, 0, 0)
 titleLabel.BackgroundTransparency = 1
-titleLabel.Text = "czwuyi HUB V.2" -- Preserved user's text
+titleLabel.Text = "czwuyi hub V.1" -- Preserved user's text
 titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 titleLabel.Font = Enum.Font.GothamBold
 titleLabel.TextSize = 18
 titleLabel.TextXAlignment = Enum.TextXAlignment.Left
 
--- Minimize button
 local minimizeBtn = Instance.new("TextButton", titleBar)
 minimizeBtn.Size = UDim2.new(0, 35, 0, 35)
 minimizeBtn.Position = UDim2.new(1, -45, 0, 5)
@@ -60,13 +58,12 @@ minimizeBtn.BorderSizePixel = 0
 local minCorner = Instance.new("UICorner", minimizeBtn)
 minCorner.CornerRadius = UDim.new(0, 8)
 
--- Tab System Frame
+-- Tab System
 local tabFrame = Instance.new("Frame", mainFrame)
 tabFrame.Size = UDim2.new(1, -20, 0, 40)
 tabFrame.Position = UDim2.new(0, 10, 0, 50)
 tabFrame.BackgroundTransparency = 1
 
--- Function to create a modern tab button
 local function createModernTab(parent, text, position, sizeX)
     local tab = Instance.new("TextButton", parent)
     tab.Size = UDim2.new(sizeX or 0.25, -7, 1, 0) -- Adjusted sizeX for more tabs
@@ -84,20 +81,20 @@ local function createModernTab(parent, text, position, sizeX)
     return tab
 end
 
--- Tab buttons (adjusted positions for 4 tabs)
+-- Adjusted tab positions and sizes for 4 tabs
 local mainTab = createModernTab(tabFrame, "หน้าแรก", UDim2.new(0, 0, 0, 0), 0.25) -- Preserved user's text
 local day99Tab = createModernTab(tabFrame, "99 day", UDim2.new(0.25, 3, 0, 0), 0.25) -- New tab
 local espTab = createModernTab(tabFrame, "Eps", UDim2.new(0.5, 6, 0, 0), 0.25) -- Preserved user's text
 local moreTab = createModernTab(tabFrame, "เพิ่มเติม", UDim2.new(0.75, 9, 0, 0), 0.25) -- Preserved user's text
 
--- Content Frames for each tab
+-- Content Frames for each tab - adjusted height to fit optimized frame
 local mainContent = Instance.new("Frame", mainFrame)
 mainContent.Size = UDim2.new(1, -20, 1, -100)
 mainContent.Position = UDim2.new(0, 10, 0, 95)
 mainContent.BackgroundTransparency = 1
 mainContent.Visible = true
 
-local day99Content = Instance.new("Frame", mainFrame) -- New content frame for 99 day tab
+local day99Content = Instance.new("Frame", mainFrame) -- New content frame
 day99Content.Size = UDim2.new(1, -20, 1, -100)
 day99Content.Position = UDim2.new(0, 10, 0, 95)
 day99Content.BackgroundTransparency = 1
@@ -115,7 +112,7 @@ moreContent.Position = UDim2.new(0, 10, 0, 95)
 moreContent.BackgroundTransparency = 1
 moreContent.Visible = false
 
--- Function to create a modern button with hover effect
+-- Modern button creation function with reduced button height
 local function createModernButton(parent, text, position, size)
     local button = Instance.new("TextButton", parent)
     button.Size = size or UDim2.new(1, 0, 0, 45) -- Reduced from 50 to 45
@@ -150,26 +147,25 @@ local floatBtn = createModernButton(mainContent, "ลอย", UDim2.new(0, 0, 0,
 local freecamBtn = createModernButton(mainContent, "กล้อง📷", UDim2.new(0, 0, 0, 100)) -- Preserved user's text
 local antikickBtn = createModernButton(mainContent, "auto kick (อย่าใช้บัค)", UDim2.new(0, 0, 0, 150)) -- Preserved user's text
 local godmodeBtn = createModernButton(mainContent, "God mode", UDim2.new(0, 0, 0, 200)) -- Preserved user's text
-local removeWallsBtn = createModernButton(mainContent, "ลบกำแพง", UDim2.new(0, 0, 0, 250)) -- New remove walls button
-local flyBtn = createModernButton(mainContent, "บิน", UDim2.new(0, 0, 0, 300)) -- New fly button
 
 -- 99 Day Tab Buttons
 local warpToCapBtn = createModernButton(day99Content, "วาปไปยังแคป", UDim2.new(0, 0, 0, 0))
 local warpToPlayerBtn = createModernButton(day99Content, "การวาปไปหาผู้เล่น", UDim2.new(0, 0, 0, 50))
-local itemVacuumBtn = createModernButton(day99Content, "ดูดของ", UDim2.new(0, 0, 0, 100)) -- Item vacuum button
+local warpToStationBtn = createModernButton(day99Content, "วาปไปยังสถานีต่าง ๆ", UDim2.new(0, 0, 0, 100)) -- NEW BUTTON
 
 -- ESP Tab Button
 local espBtn = createModernButton(espContent, "แสดงชื่อ Player", UDim2.new(0, 0, 0, 0)) -- Preserved user's text
-local espAllBtn = createModernTab(espContent, "ESP", UDim2.new(0, 0, 0, 50), 1) -- Renamed ESP 2 button to "ESP"
+local esp2Btn = createModernButton(espContent, "แสดงชื่อมอนเตอร์", UDim2.new(0, 0, 0, 50)) -- Updated ESP 2 button text
 
 -- More Tab Buttons with tighter spacing
 local analyzeBtn = createModernButton(moreContent, "ชื่อคนรวยที่สุดในเซิพของมึง", UDim2.new(0, 0, 0, 0)) -- Preserved user's text
 local serverhopBtn = createModernButton(moreContent, "รีเซิพ", UDim2.new(0, 0, 0, 50)) -- Preserved user's text
+local removeWallsBtn = createModernButton(moreContent, "ลบกำแพง", UDim2.new(0, 0, 0, 100)) -- NEW BUTTON
 
--- Credits label in More tab
+-- Credits label in More tab - moved up to eliminate space
 local creditsLabel = Instance.new("TextLabel", moreContent)
 creditsLabel.Size = UDim2.new(1, 0, 0, 40)
-creditsLabel.Position = UDim2.new(0, 0, 0, 105) -- Adjusted position
+creditsLabel.Position = UDim2.new(0, 0, 0, 155) -- Moved down to accommodate new button
 creditsLabel.BackgroundTransparency = 1
 creditsLabel.Text = "Credits to czwuyi_AV"
 creditsLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -187,8 +183,8 @@ local function switchTab(tab)
     
     mainTab.BackgroundColor3 = inactiveColor
     mainTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-    day99Tab.BackgroundColor3 = inactiveColor
-    day99Tab.TextColor3 = Color3.fromRGB(255, 255, 255)
+    day99Tab.BackgroundColor3 = inactiveColor -- New tab
+    day99Tab.TextColor3 = Color3.fromRGB(255, 255, 255) -- New tab
     espTab.BackgroundColor3 = inactiveColor
     espTab.TextColor3 = Color3.fromRGB(255, 255, 255)
     moreTab.BackgroundColor3 = inactiveColor
@@ -196,59 +192,41 @@ local function switchTab(tab)
     
     -- Hide all content frames
     mainContent.Visible = false
-    day99Content.Visible = false
+    day99Content.Visible = false -- New tab
     espContent.Visible = false
     moreContent.Visible = false
     
-    -- Deactivate specific functionalities when switching tabs
+    -- Hide player list UI if visible
     if playerListFrame and playerListFrame.Visible then
         playerListFrame.Visible = false
-        clearPlayerESP()
+        clearPlayerESP() -- Clear player ESP when tab changes
     end
-    if espAllOn then -- Now this refers to the "ESP" button for highlighting everything
-        espAllOn = false
-        espAllBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        espAllBtn.Text = "ESP" 
-        if espAllLoopConnection then
-            espAllLoopConnection:Disconnect()
-            espAllLoopConnection = nil
-        end
-        clearAllESPAll()
-        warn("General ESP deactivated due to tab switch.")
+
+    -- Hide station list UI if visible
+    if stationListFrame and stationListFrame.Visible then
+        stationListFrame.Visible = false
     end
-    if itemVacuumOn then
-        itemVacuumOn = false
-        itemVacuumBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        itemVacuumBtn.Text = "ดูดของ"
-        if itemVacuumLoopConnection then
-            itemVacuumLoopConnection:Disconnect()
-            itemVacuumLoopConnection = nil
-        end
-        warn("Item Vacuum deactivated due to tab switch.")
-    end
-    if removeWallsOn then -- Deactivate remove walls
-        removeWallsOn = false
-        removeWallsBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        removeWallsBtn.Text = "ลบกำแพง"
-        local char = player.Character
-        if char then
-            for _, part in pairs(Workspace:GetDescendants()) do
-                if part:IsA("BasePart") and part.Parent and not Players:GetPlayerFromCharacter(part.Parent) and not part:IsA("Terrain") then
-                    part.CanCollide = true
-                    part.Transparency = 0
-                end
+
+    -- Deactivate ESP 2 if switching away from ESP tab
+    if currentTab == "ESP" and tab ~= "ESP" then
+        if esp2On then
+            esp2On = false
+            esp2Btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+            esp2Btn.Text = "แสดงชื่อมอนเตอร์"
+            if esp2LoopConnection then
+                esp2LoopConnection:Disconnect()
+                esp2LoopConnection = nil
             end
+            clearAllESP2()
         end
-        warn("Remove Walls deactivated due to tab switch.")
     end
-    -- "บิน" now just runs a script, so no state to toggle off here.
 
     -- Show selected tab
     if tab == "Main" then
         mainTab.BackgroundColor3 = activeColor
         mainTab.TextColor3 = Color3.fromRGB(255, 255, 255)
         mainContent.Visible = true
-    elseif tab == "99Day" then
+    elseif tab == "99Day" then -- New tab logic
         day99Tab.BackgroundColor3 = activeColor
         day99Tab.TextColor3 = Color3.fromRGB(255, 255, 255)
         day99Content.Visible = true
@@ -263,11 +241,10 @@ local function switchTab(tab)
     end
     
     currentTab = tab
-    warn("Switched to tab: " .. tab)
 end
 
 mainTab.MouseButton1Click:Connect(function() switchTab("Main") end)
-day99Tab.MouseButton1Click:Connect(function() switchTab("99Day") end)
+day99Tab.MouseButton1Click:Connect(function() switchTab("99Day") end) -- New tab connection
 espTab.MouseButton1Click:Connect(function() switchTab("ESP") end)
 moreTab.MouseButton1Click:Connect(function() switchTab("More") end)
 
@@ -279,12 +256,15 @@ stealBtn.MouseButton1Click:Connect(function()
     
     local char = player.Character
     if char and char:FindFirstChild("HumanoidRootPart") and char:FindFirstChild("Humanoid") then
+        -- Ragdoll the character first
         local humanoid = char.Humanoid
         humanoid.PlatformStand = true
-        humanoid:ChangeState(Enum.HumanoidStateType.Physics)
+        humanoid:ChangeState(Enum.HumanoidStateType.Physics) -- Makes character ragdoll
         
+        -- Wait a brief moment for ragdoll to take effect
         task.wait(0.1)
         
+        -- Then teleport
         local pos = CFrame.new(0, -500, 0)
         local startT = os.clock()
         while os.clock() - startT < 1 do
@@ -294,16 +274,17 @@ stealBtn.MouseButton1Click:Connect(function()
             task.wait()
         end
         
+        -- Un-ragdoll after teleportation
         if char and char:FindFirstChild("Humanoid") then
             humanoid.PlatformStand = false
             humanoid:ChangeState(Enum.HumanoidStateType.Running)
         end
     end
     
+    -- Reset button after operation
     task.wait(0.5)
     stealBtn.Text = originalText
     stealBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-    warn("STEAL button clicked: Attempted to teleport player.") -- Debug message
 end)
 
 -- FLOAT FUNCTIONALITY
@@ -316,7 +297,6 @@ floatBtn.MouseButton1Click:Connect(function()
         if floatForce then floatForce:Destroy() end
         floatBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
         floatBtn.Text = "ลอย" -- Preserved user's text
-        warn("FLOAT button clicked: Float deactivated.") -- Debug message
     else
         floatForce = Instance.new("BodyVelocity")
         floatForce.Velocity = Vector3.new(0, 20, 0)
@@ -325,20 +305,15 @@ floatBtn.MouseButton1Click:Connect(function()
         floatForce.Parent = root
         floatBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
         floatBtn.Text = "ปิดลอย" -- Preserved user's text
-        warn("FLOAT button clicked: Float activated.") -- Debug message
     end
     floatOn = not floatOn
 end)
 
 -- FREECAM FUNCTIONALITY
 freecamBtn.MouseButton1Click:Connect(function()
-    warn("FREECAM button clicked: Attempting to load external script.") -- Debug message
-    local success, err = pcall(function()
+    pcall(function() -- Added pcall for safety
         loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Freecam'))()
     end)
-    if not success then
-        warn("FREECAM script failed to load/execute: " .. tostring(err))
-    end
 end)
 
 -- ANTI-KICK FUNCTIONALITY
@@ -347,13 +322,9 @@ antikickBtn.MouseButton1Click:Connect(function()
     antikickBtn.Text = "รอ.." -- Preserved user's text
     antikickBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
     
-    warn("ANTI-KICK button clicked: Attempting to load external script.") -- Debug message
-    local success, err = pcall(function()
+    pcall(function()
         loadstring(game:HttpGet("https://pastefy.app/dAjYZBnq/raw"))()
     end)
-    if not success then
-        warn("ANTI-KICK script failed to load/execute: " .. tostring(err))
-    end
     
     task.wait(1)
     antikickBtn.Text = "บัคอยู่" -- Preserved user's text
@@ -364,17 +335,19 @@ end)
 local godModeOn = false
 godmodeBtn.MouseButton1Click:Connect(function()
     local char = player.Character
-    if not char then warn("GOD MODE: Player character not found.") return end
+    if not char then return end
     
     local humanoid = char:FindFirstChild("Humanoid")
-    if not humanoid then warn("GOD MODE: Humanoid not found in character.") return end
+    if not humanoid then return end
     
     godModeOn = not godModeOn
     
     if godModeOn then
+        -- Enable god mode
         humanoid.MaxHealth = math.huge
         humanoid.Health = math.huge
         
+        -- Protect against health changes
         local connection
         connection = humanoid.HealthChanged:Connect(function()
             if godModeOn then
@@ -384,80 +357,19 @@ godmodeBtn.MouseButton1Click:Connect(function()
             end
         end)
         
+        -- Visual feedback
         godmodeBtn.Text = "เปิดโหมดแล้ว🤡" -- Preserved user's text
         godmodeBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
-        warn("GOD MODE activated.") -- Debug message
     else
+        -- Disable god mode
         humanoid.MaxHealth = 100
         humanoid.Health = 100
         
+        -- Visual feedback
         godmodeBtn.Text = "God mode" -- Preserved user's text
         godmodeBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        warn("GOD MODE deactivated.") -- Debug message
     end
 end)
-
--- NEW: REMOVE WALLS FUNCTIONALITY ("ลบกำแพง")
-local removeWallsOn = false
-local originalPartStates = {} -- To store original CanCollide and Transparency
-
-removeWallsBtn.MouseButton1Click:Connect(function()
-    removeWallsOn = not removeWallsOn
-    removeWallsBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226) -- Highlight when clicked
-
-    if removeWallsOn then
-        removeWallsBtn.Text = "คืนกำแพง"
-        warn("REMOVE WALLS: Activated.")
-        originalPartStates = {} -- Clear previous states
-
-        for _, part in pairs(Workspace:GetDescendants()) do
-            if part:IsA("BasePart") and part.Parent and not Players:GetPlayerFromCharacter(part.Parent) and not part:IsA("Terrain") then
-                -- Store original state
-                originalPartStates[part] = {CanCollide = part.CanCollide, Transparency = part.Transparency}
-                
-                part.CanCollide = false
-                part.Transparency = 0.5 -- Make slightly transparent
-            end
-        end
-    else
-        removeWallsBtn.Text = "ลบกำแพง"
-        warn("REMOVE WALLS: Deactivated.")
-        for part, state in pairs(originalPartStates) do
-            if part and part.Parent then -- Ensure part still exists
-                part.CanCollide = state.CanCollide
-                part.Transparency = state.Transparency
-            end
-        end
-        originalPartStates = {} -- Clear states after restoring
-    end
-    -- Reset button color after a short delay if it's not a toggle that stays highlighted
-    task.delay(0.2, function()
-        if not removeWallsOn then -- Only reset if it's currently off
-            removeWallsBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        end
-    end)
-end)
-
-
--- NEW: FLY FUNCTIONALITY ("บิน")
-flyBtn.MouseButton1Click:Connect(function()
-    flyBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226) -- Briefly highlight when clicked
-    flyBtn.Text = "กำลังรัน..."
-    warn("บิน button clicked: Attempting to run external script.") -- Debug message
-    local success, err = pcall(function()
-        loadstring("\108\111\97\100\115\116\114\105\110\103\40\103\97\109\101\58\72\116\116\112\71\101\116\40\40\39\104\116\116\112\115\58\47\47\103\105\115\116\46\103\105\116\104\117\98\117\115\101\114\99\111\110\116\101\110\116\46\99\111\109\47\109\101\111\122\111\110\101\89\84\47\98\102\48\51\55\100\102\102\57\102\48\97\55\48\48\49\55\51\48\52\100\100\100\54\55\102\100\99\100\51\55\48\47\114\97\119\47\101\49\52\101\55\52\102\52\50\53\98\48\54\48\100\102\53\50\51\51\52\51\99\102\51\48\98\55\56\55\48\55\52\101\98\51\99\53\100\50\47\97\114\99\101\117\115\37\50\53\50\48\120\37\50\53\50\48\102\108\121\37\50\53\50\48\50\37\50\53\50\48\111\98\102\108\117\99\97\116\111\114\39\41\44\116\114\117\101\41\41\40\41\10\10")() 
-    end)
-    if not success then
-        warn("บิน script failed to load/execute: " .. tostring(err))
-    end
-    task.delay(1, function()
-        if flyBtn then -- Check if button still exists before updating
-            flyBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-            flyBtn.Text = "บิน"
-        end
-    end)
-end)
-
 
 -- NEW: WARP TO CAP FUNCTIONALITY (8, 8, 8)
 warpToCapBtn.MouseButton1Click:Connect(function()
@@ -468,9 +380,6 @@ warpToCapBtn.MouseButton1Click:Connect(function()
     local char = player.Character
     if char and char:FindFirstChild("HumanoidRootPart") then
         char.HumanoidRootPart.CFrame = CFrame.new(8, 8, 8)
-        warn("WARP TO CAP: Teleported to 8,8,8.") -- Debug message
-    else
-        warn("WARP TO CAP: Player character or HumanoidRootPart not found.") -- Debug message
     end
 
     task.wait(0.5)
@@ -479,68 +388,69 @@ warpToCapBtn.MouseButton1Click:Connect(function()
 end)
 
 -- NEW: WARP TO PLAYER FUNCTIONALITY
-local playerListFrame
-local playerESPInstances = {}
+local playerListFrame -- Declare outside to manage visibility
+local playerESPInstances = {} -- To store BoxHandleAdornments for player ESP
 
 local function clearPlayerESP()
     for _, adornment in pairs(playerESPInstances) do
         if adornment then adornment:Destroy() end
     end
     playerESPInstances = {}
-    warn("Player ESP cleared.") -- Debug message
 end
 
 local function createPlayerESP(targetPlayer)
-    if targetPlayer == player or playerESPInstances[targetPlayer] then return end
     local char = targetPlayer.Character or targetPlayer.CharacterAdded:Wait()
     local rootPart = char:FindFirstChild("HumanoidRootPart")
-    if not rootPart then warn("Player ESP: RootPart not found for " .. targetPlayer.Name) return end
+    if not rootPart then return end
 
     local adornment = Instance.new("BoxHandleAdornment")
     adornment.Adornee = rootPart
     adornment.Color3 = Color3.fromRGB(255, 0, 0) -- Red box
     adornment.Transparency = 0.5
-    adornment.ZIndex = 2
+    adornment.ZIndex = 2 -- Higher ZIndex to be visible
     adornment.AlwaysOnTop = true
-    adornment.Size = rootPart.Size + Vector3.new(0.5, 0.5, 0.5)
-    adornment.Parent = CoreGui
+    adornment.Size = rootPart.Size + Vector3.new(0.5, 0.5, 0.5) -- Slightly larger than the part
+    adornment.Parent = CoreGui -- Parent to CoreGui for visibility
     playerESPInstances[targetPlayer] = adornment
-    warn("Player ESP: Created for " .. targetPlayer.Name) -- Debug message
 
-    local charRemovingConn
+    -- Update adornment size if character changes
+    local charAddedConn, charRemovingConn
+    charAddedConn = targetPlayer.CharacterAdded:Connect(function(newChar)
+        local newRoot = newChar:WaitForChild("HumanoidRootPart")
+        adornment.Adornee = newRoot
+        adornment.Size = newRoot.Size + Vector3.new(0.5, 0.5, 0.5)
+    end)
     charRemovingConn = targetPlayer.CharacterRemoving:Connect(function()
-        if adornment and adornment.Parent then -- Check if adornment still exists and has a parent
-            adornment:Destroy()
-        end
-        playerESPInstances[targetPlayer] = nil
-        warn("Player ESP: Removed for " .. targetPlayer.Name .. " (character removed).") -- Debug message
-        if charRemovingConn then charRemovingConn:Disconnect() end -- Disconnect to prevent memory leaks
+        adornment.Adornee = nil -- Clear adornee when character is removed
     end)
 
+    -- Clean up connections when adornment is destroyed
     adornment.Destroying:Connect(function()
+        if charAddedConn then charAddedConn:Disconnect() end
         if charRemovingConn then charRemovingConn:Disconnect() end
     end)
 end
 
 local function updatePlayerList()
+    -- Clear existing list items
     for _, child in pairs(playerListFrame:GetChildren()) do
         if child:IsA("Frame") and child.Name == "PlayerEntry" then
             child:Destroy()
         end
     end
-    clearPlayerESP()
+    clearPlayerESP() -- Clear existing ESP boxes
 
     local yOffset = 0
     for _, p in pairs(Players:GetPlayers()) do
         if p ~= player then
-            createPlayerESP(p)
+            createPlayerESP(p) -- Create ESP for each player
             
             local playerEntry = Instance.new("Frame")
             playerEntry.Name = "PlayerEntry"
             playerEntry.Size = UDim2.new(1, 0, 0, 30)
             playerEntry.Position = UDim2.new(0, 0, 0, yOffset)
             playerEntry.BackgroundTransparency = 1
-            playerEntry.Parent = playerListFrame
+            playerEntry.Parent = playerListScrollingFrame -- Parent to scrolling frame
 
             local playerNameLabel = Instance.new("TextLabel")
             playerNameLabel.Size = UDim2.new(0.7, 0, 1, 0)
@@ -560,24 +470,21 @@ local function updatePlayerList()
                 local targetChar = p.Character
                 if char and char:FindFirstChild("HumanoidRootPart") and targetChar and targetChar:FindFirstChild("HumanoidRootPart") then
                     char.HumanoidRootPart.CFrame = targetChar.HumanoidRootPart.CFrame + Vector3.new(0, 5, 0) -- Warp slightly above target
-                    warn("WARP TO PLAYER: Teleported to " .. p.Name) -- Debug message
-                else
-                    warn("WARP TO PLAYER: Target player or root part not found for " .. p.Name) -- Debug message
                 end
                 playerListFrame.Visible = false -- Hide list after warping
-                clearPlayerESP() -- Clear ESP after warping
+                clearPlayerESP() -- Clear ESP when list closes
             end)
 
-            yOffset = yOffset + 35
+            yOffset = yOffset + 35 -- Spacing for next entry
         end
     end
-    warn("Player list updated.") -- Debug message
+    playerListScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, yOffset) -- Update canvas size
 end
 
 -- Create the player list sub-frame (hidden initially)
 playerListFrame = Instance.new("Frame", day99Content)
-playerListFrame.Size = UDim2.new(1, 0, 1, -100)
-playerListFrame.Position = UDim2.new(0, 0, 0, 100)
+playerListFrame.Size = UDim2.new(1, 0, 1, -100) -- Adjusted size to fit below buttons
+playerListFrame.Position = UDim2.new(0, 0, 0, 100) -- Position below warp buttons
 playerListFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
 playerListFrame.BorderSizePixel = 0
 playerListFrame.Visible = false
@@ -585,545 +492,459 @@ local listCorner = Instance.new("UICorner", playerListFrame)
 listCorner.CornerRadius = UDim.new(0, 10)
 
 local playerListScrollingFrame = Instance.new("ScrollingFrame", playerListFrame)
-playerListScrollingFrame.Size = UDim2.new(1, 0, 1, -30)
+playerListScrollingFrame.Size = UDim2.new(1, 0, 1, -30) -- Leave space for close button
 playerListScrollingFrame.Position = UDim2.new(0, 0, 0, 0)
 playerListScrollingFrame.BackgroundTransparency = 1
-playerListScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+playerListScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0) -- Will be updated dynamically
 playerListScrollingFrame.ScrollBarThickness = 6
 playerListScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
-playerListScrollingFrame.Parent = playerListFrame
+
 
 local playerListCloseBtn = createModernButton(playerListFrame, "ปิด", UDim2.new(0, 0, 1, -30), UDim2.new(1, 0, 0, 30))
 playerListCloseBtn.MouseButton1Click:Connect(function()
     playerListFrame.Visible = false
-    clearPlayerESP()
-    warn("Player list closed.") -- Debug message
+    clearPlayerESP() -- Clear ESP when closing
 end)
 
 warpToPlayerBtn.MouseButton1Click:Connect(function()
-    playerListFrame.Visible = not playerListFrame.Visible
-    if playerListFrame.Visible then
-        updatePlayerList()
-        local contentHeight = #Players:GetPlayers() * 35
-        playerListScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, contentHeight)
-        warn("WARP TO PLAYER button clicked: Player list opened.") -- Debug message
+    playerListFrame.Visible = true
+    updatePlayerList()
+end)
+
+-- ESP Functionality (Player Names)
+local espOn = false
+local espLabels = {}
+
+local function createESPLabel(targetPlayer)
+    local char = targetPlayer.Character or targetPlayer.CharacterAdded:Wait()
+    local rootPart = char:FindFirstChild("HumanoidRootPart")
+    if not rootPart then return end
+
+    local billboardGui = Instance.new("BillboardGui")
+    billboardGui.Size = UDim2.new(0, 150, 0, 50)
+    billboardGui.AlwaysOnTop = true
+    billboardGui.ExtentsOffset = Vector3.new(0, 2, 0) -- Offset above character
+    billboardGui.Adornee = rootPart
+    billboardGui.Parent = CoreGui
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextScaled = true
+    textLabel.TextStrokeTransparency = 0
+    textLabel.Text = targetPlayer.Name
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.Font = Enum.Font.GothamBold
+    textLabel.Parent = billboardGui
+
+    espLabels[targetPlayer] = billboardGui
+
+    -- Update adornee if character changes
+    local charAddedConn, charRemovingConn
+    charAddedConn = targetPlayer.CharacterAdded:Connect(function(newChar)
+        local newRoot = newChar:WaitForChild("HumanoidRootPart")
+        billboardGui.Adornee = newRoot
+    end)
+    charRemovingConn = targetPlayer.CharacterRemoving:Connect(function()
+        billboardGui.Adornee = nil -- Clear adornee when character is removed
+    end)
+
+    -- Clean up connections when billboardGui is destroyed
+    billboardGui.Destroying:Connect(function()
+        if charAddedConn then charAddedConn:Disconnect() end
+        if charRemovingConn then charRemovingConn:Disconnect() end
+    end)
+end
+
+local function clearESP()
+    for player, label in pairs(espLabels) do
+        if label then label:Destroy() end
+    end
+    espLabels = {}
+end
+
+local function updatePlayerESP()
+    if espOn then
+        clearESP()
+        for _, p in pairs(Players:GetPlayers()) do
+            if p ~= player then
+                createESPLabel(p)
+            end
+        end
     else
-        clearPlayerESP()
-        warn("WARP TO PLAYER button clicked: Player list closed.") -- Debug message
+        clearESP()
+    end
+end
+
+Players.PlayerAdded:Connect(function(p)
+    if espOn and p ~= player then
+        createESPLabel(p)
     end
 end)
 
--- ESP FUNCTIONALITY (Player Names)
-local espOn = false
-local espInstances = {}
-local function createESPForPlayer(target)
-    if target == player or espInstances[target] then return end
-    local character = target.Character or target.CharacterAdded:Wait()
-    local head = character:FindFirstChild("Head")
-    if not head then warn("Player ESP: Head not found for " .. target.Name) return end
-
-    local esp = Instance.new("BillboardGui")
-    esp.Adornee = head
-    esp.AlwaysOnTop = true
-    esp.Size = UDim2.new(0, 100, 0, 40)
-    esp.StudsOffset = Vector3.new(0, 3, 0)
-    esp.Parent = CoreGui
-    local label = Instance.new("TextLabel")
-    label.Text = target.Name
-    label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    label.TextStrokeTransparency = 0
-    label.TextStrokeColor3 = Color3.fromRGB(138, 43, 226)
-    label.BackgroundTransparency = 1
-    label.Size = UDim2.new(1, 0, 1, 0)
-    label.Font = Enum.Font.GothamBold
-    label.TextScaled = true
-    label.Parent = esp
-    espInstances[target] = esp
-    warn("Player ESP: Created for " .. target.Name) -- Debug message
-
-    local charRemovingConn
-    charRemovingConn = target.CharacterRemoving:Connect(function()
-        if espInstances[target] then
-            espInstances[target]:Destroy()
-            espInstances[target] = nil
-        end
-        warn("Player ESP: Removed for " .. target.Name .. " (character removed).") -- Debug message
-        if charRemovingConn then charRemovingConn:Disconnect() end
-    end)
-    esp.Destroying:Connect(function()
-        if charRemovingConn then charRemovingConn:Disconnect() end
-    end)
-end
-
-local function clearAllESP()
-    for _, gui in pairs(espInstances) do
-        if gui then gui:Destroy() end
+Players.PlayerRemoving:Connect(function(p)
+    if espLabels[p] then
+        espLabels[p]:Destroy()
+        espLabels[p] = nil
     end
-    espInstances = {}
-    warn("All Player ESP cleared.") -- Debug message
-end
+end)
 
 espBtn.MouseButton1Click:Connect(function()
     espOn = not espOn
     if espOn then
         espBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-        espBtn.Text = "เปิดแล้ว" -- Preserved user's text
-        for _, p in pairs(Players:GetPlayers()) do
-            createESPForPlayer(p)
-        end
-        warn("Player ESP activated.") -- Debug message
+        espBtn.Text = "ปิดชื่อ Player" -- Preserved user's text
     else
         espBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
         espBtn.Text = "แสดงชื่อ Player" -- Preserved user's text
-        clearAllESP()
-        warn("Player ESP deactivated.") -- Debug message
     end
+    updatePlayerESP()
 end)
 
----
-### **ESP (Highlight Everything around you)**
----
-local espAllOn = false -- This now controls the general ESP
-local espAllInstances = {} 
-local ESP_HIGHLIGHT_RADIUS = 200 -- Highlight everything within 200 studs
+-- ESP 2 Functionality (Monster/NPC Names)
+local esp2On = false
+local esp2Labels = {}
+local esp2LoopConnection
 
-local function createESPAllForObject(targetModelOrPart)
-    if espAllInstances[targetModelOrPart] then return end
-
-    local primaryPart = nil
-    local objectName = targetModelOrPart.Name
-
-    if targetModelOrPart:IsA("Model") then
-        primaryPart = targetModelOrPart.PrimaryPart or targetModelOrPart:FindFirstChildOfClass("BasePart")
-        -- If it's a character (player or NPC) with a Humanoid, use the Head or HumanoidRootPart
-        local humanoid = targetModelOrPart:FindFirstChildOfClass("Humanoid")
-        if humanoid then
-            primaryPart = targetModelOrPart:FindFirstChild("Head") or humanoid.RootPart
+local function isMonster(instance)
+    -- This is a very basic check. You might need to adjust this
+    -- based on how monsters/NPCs are identified in your specific game.
+    -- Common indicators: has a Humanoid, not a player's character,
+    -- or specific model names/tags.
+    if instance:IsA("Model") and instance:FindFirstChildOfClass("Humanoid") then
+        if not Players:GetPlayerFromCharacter(instance) then
+            -- Check for common monster naming conventions or tags
+            local name = instance.Name:lower()
+            return name:find("monster") or name:find("enemy") or name:find("npc") or name:find("creature") or name:find("zombie")
         end
-        if not primaryPart then return end
-    elseif targetModelOrPart:IsA("BasePart") then
-        primaryPart = targetModelOrPart
-    else
-        return -- Only highlight Models and BaseParts
     end
+    return false
+end
 
-    -- Skip if it's a player character or part of a player character
-    if Players:GetPlayerFromCharacter(targetModelOrPart) or (primaryPart and primaryPart.Parent and Players:GetPlayerFromCharacter(primaryPart.Parent)) then 
-        return 
-    end
-    -- Skip Terrain
-    if targetModelOrPart:IsA("Terrain") then return end
+local function createESP2Label(targetInstance)
+    local humanoid = targetInstance:FindFirstChildOfClass("Humanoid")
+    local rootPart = targetInstance:FindFirstChild("HumanoidRootPart") or (humanoid and humanoid.RootPart)
 
-    local esp = Instance.new("BillboardGui")
-    esp.Adornee = primaryPart
-    esp.AlwaysOnTop = true
-    esp.Size = UDim2.new(0, 100, 0, 40)
-    esp.StudsOffset = Vector3.new(0, 3, 0)
-    esp.Parent = CoreGui
-    
-    local label = Instance.new("TextLabel")
-    label.Text = objectName
-    label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    label.TextStrokeTransparency = 0
-    label.TextStrokeColor3 = Color3.fromRGB(255, 0, 0) -- Red stroke for general ESP
-    label.BackgroundTransparency = 1
-    label.Size = UDim2.new(1, 0, 1, 0)
-    label.Font = Enum.Font.GothamBold
-    label.TextScaled = true
-    label.Parent = esp
-    espAllInstances[targetModelOrPart] = esp
-    warn("General ESP: Created for " .. targetModelOrPart.Name) -- Debug message
+    if not rootPart then return end
 
-    local ancestryChangedConn = targetModelOrPart.AncestryChanged:Connect(function()
-        if not targetModelOrPart:IsDescendantOf(Workspace) then
-            if espAllInstances[targetModelOrPart] then
-                espAllInstances[targetModelOrPart]:Destroy()
-                espAllInstances[targetModelOrPart] = nil
+    local billboardGui = Instance.new("BillboardGui")
+    billboardGui.Size = UDim2.new(0, 150, 0, 50)
+    billboardGui.AlwaysOnTop = true
+    billboardGui.ExtentsOffset = Vector3.new(0, 2, 0)
+    billboardGui.Adornee = rootPart
+    billboardGui.Parent = CoreGui
+
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.TextScaled = true
+    textLabel.TextStrokeTransparency = 0
+    textLabel.Text = targetInstance.Name
+    textLabel.TextColor3 = Color3.fromRGB(0, 255, 0) -- Green for monsters
+    textLabel.Font = Enum.Font.GothamBold
+    textLabel.Parent = billboardGui
+
+    esp2Labels[targetInstance] = billboardGui
+
+    -- Update adornee if instance moves or is re-parented (simple check)
+    local conn
+    conn = RunService.Heartbeat:Connect(function()
+        if not targetInstance or not targetInstance.Parent or not rootPart or not rootPart.Parent then
+            if esp2Labels[targetInstance] then
+                esp2Labels[targetInstance]:Destroy()
+                esp2Labels[targetInstance] = nil
             end
-            warn("General ESP: Removed for " .. targetModelOrPart.Name .. " (removed from workspace).") -- Debug message
+            if conn then conn:Disconnect() end
+            return
         end
-    end)
-    esp.Destroying:Connect(function()
-        if ancestryChangedConn then ancestryChangedConn:Disconnect() end
+        billboardGui.Adornee = rootPart -- Re-assign to ensure it follows
     end)
 end
 
-local function clearAllESPAll()
-    for _, gui in pairs(espAllInstances) do
-        if gui then gui:Destroy() end
+local function clearAllESP2()
+    for instance, label in pairs(esp2Labels) do
+        if label then label:Destroy() end
     end
-    espAllInstances = {}
-    warn("All General ESP cleared.") -- Debug message
+    esp2Labels = {}
 end
 
-local espAllLoopConnection = nil
-local function espAllUpdateLoop()
-    if not espAllOn then return end
-    clearAllESPAll() -- Clear previous ESP each frame
-
-    local playerRoot = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-    if not playerRoot then warn("General ESP: Player RootPart not found.") return end
-
-    for _, descendant in pairs(Workspace:GetDescendants()) do
-        local isExcluded = false
-        -- Exclude anything parented to a player's character
-        if Players:GetPlayerFromCharacter(descendant) then isExcluded = true end
-        if descendant:IsA("BasePart") and descendant.Parent and Players:GetPlayerFromCharacter(descendant.Parent) then isExcluded = true end
-        -- Exclude terrain
-        if descendant:IsA("Terrain") then isExcluded = true end
-
-        if not isExcluded then
-            local targetPartForDistance = nil
-            if descendant:IsA("Model") then
-                targetPartForDistance = descendant.PrimaryPart or descendant:FindFirstChildOfClass("BasePart")
-            elseif descendant:IsA("BasePart") then
-                targetPartForDistance = descendant
-            end
-
-            if targetPartForDistance and targetPartForDistance.Parent then
-                local distance = (playerRoot.Position - targetPartForDistance.Position).Magnitude
-                if distance <= ESP_HIGHLIGHT_RADIUS then
-                    createESPAllForObject(descendant)
-                end
+local function updateESP2()
+    clearAllESP2()
+    if esp2On then
+        for _, child in pairs(Workspace:GetDescendants()) do
+            if isMonster(child) then
+                createESP2Label(child)
             end
         end
     end
 end
 
-espAllBtn.MouseButton1Click:Connect(function()
-    espAllOn = not espAllOn
-    if espAllOn then
-        espAllBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-        espAllBtn.Text = "ปิด ESP" -- Updated button text
-        espAllLoopConnection = RunService.RenderStepped:Connect(espAllUpdateLoop)
-        warn("General ESP activated.") -- Debug message
-    else
-        espAllBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        espAllBtn.Text = "ESP" -- Updated button text
-        if espAllLoopConnection then
-            espAllLoopConnection:Disconnect()
-            espAllLoopConnection = nil
-        end
-        clearAllESPAll()
-        warn("General ESP deactivated.") -- Debug message
-    end
-end)
-
----
-### **ดูดของ (Item Vacuum for "store" Tools)**
----
-local itemVacuumOn = false
-local itemVacuumLoopConnection = nil
-local VACUUM_RADIUS = 50 -- Radius to vacuum items
-
-local function itemVacuumLoop()
-    if not itemVacuumOn then return end
-    
-    local playerChar = player.Character
-    if not playerChar then warn("Item Vacuum: Player character not found.") return end
-
-    local playerRoot = playerChar:FindFirstChild("HumanoidRootPart")
-    if not playerRoot then warn("Item Vacuum: Player HumanoidRootPart not found.") return end
-
-    -- Check if the player is holding "old sack"
-    local holdingOldSack = false
-    local currentTool = player.Character and player.Character:FindFirstChildOfClass("Tool")
-    if currentTool and currentTool.Name:lower() == "old sack" then
-        holdingOldSack = true
-    end
-
-    if not holdingOldSack then
-        -- If not holding, deactivate vacuum and reset button
-        if itemVacuumOn then -- Only reset if it was previously active
-            itemVacuumOn = false
-            itemVacuumBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-            itemVacuumBtn.Text = "ดูดของ"
-            if itemVacuumLoopConnection then
-                itemVacuumLoopConnection:Disconnect()
-                itemVacuumLoopConnection = nil
-            end
-            warn("Item Vacuum: Deactivated because 'old sack' is not held.") -- Debug message
-        end
-        return
-    end
-
-    for _, descendant in pairs(Workspace:GetDescendants()) do
-        -- Only consider Tools that are not parented to a player character or NPC
-        if descendant:IsA("Tool") and descendant.Parent and not Players:GetPlayerFromCharacter(descendant.Parent) and not descendant.Parent:FindFirstChildOfClass("Humanoid") then
-            -- Ensure it's not the "old sack" tool itself
-            if descendant.Name:lower() == "old sack" then
-                continue
-            end
-
-            -- Check if the Tool's name contains "store"
-            if string.find(descendant.Name:lower(), "store") then
-                local handle = descendant:FindFirstChild("Handle") or descendant:FindFirstChildOfClass("BasePart")
-                if handle then
-                    local distance = (playerRoot.Position - handle.Position).Magnitude
-                    if distance <= VACUUM_RADIUS then
-                        descendant.Parent = player.Backpack -- Move Tool to player's backpack
-                        warn("Item Vacuum: Picked up tool '" .. descendant.Name .. "' containing 'store'.") -- Debug message
-                    end
-                end
-            end
-        end
-    end
-end
-
-itemVacuumBtn.MouseButton1Click:Connect(function()
-    itemVacuumOn = not itemVacuumOn
-    if itemVacuumOn then
-        local playerChar = player.Character
-        local holdingOldSack = false
-        if playerChar then
-            local currentTool = playerChar:FindFirstChildOfClass("Tool")
-            if currentTool and currentTool.Name:lower() == "old sack" then
-                holdingOldSack = true
-            end
-        end
-
-        if holdingOldSack then
-            itemVacuumBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-            itemVacuumBtn.Text = "ปิดดูดของ"
-            itemVacuumLoopConnection = RunService.Heartbeat:Connect(itemVacuumLoop)
-            warn("Item Vacuum activated.") -- Debug message
+local function startESP2Loop()
+    if esp2LoopConnection then esp2LoopConnection:Disconnect() end
+    esp2LoopConnection = RunService.Heartbeat:Connect(function()
+        if esp2On then
+            updateESP2() -- Continuously update for new/removed monsters
         else
-            itemVacuumOn = false -- Ensure it's off if not holding
-            itemVacuumBtn.Text = "ดูดของ (ต้องถือ old sack)" -- Inform user
-            itemVacuumBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 100) -- Indicate error/requirement
-            warn("Item Vacuum: Activation failed, 'old sack' not held.") -- Debug message
-            task.delay(2, function() -- Reset button text after a delay
-                if itemVacuumBtn then
-                    itemVacuumBtn.Text = "ดูดของ"
-                    itemVacuumBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-                end
-            end)
+            if esp2LoopConnection then esp2LoopConnection:Disconnect() end
+            esp2LoopConnection = nil
         end
+    end)
+end
+
+esp2Btn.MouseButton1Click:Connect(function()
+    esp2On = not esp2On
+    if esp2On then
+        esp2Btn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+        esp2Btn.Text = "ปิดชื่อมอนเตอร์"
+        startESP2Loop()
     else
-        itemVacuumBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        itemVacuumBtn.Text = "ดูดของ"
-        if itemVacuumLoopConnection then
-            itemVacuumLoopConnection:Disconnect()
-            itemVacuumLoopConnection = nil
+        esp2Btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        esp2Btn.Text = "แสดงชื่อมอนเตอร์"
+        if esp2LoopConnection then
+            esp2LoopConnection:Disconnect()
+            esp2LoopConnection = nil
         end
-        warn("Item Vacuum deactivated.") -- Debug message
+        clearAllESP2()
     end
 end)
 
----
-### **ANALYZE FUNCTIONALITY**
----
+-- ANALYZE BUTTON FUNCTIONALITY
 analyzeBtn.MouseButton1Click:Connect(function()
-    local highest = 0
-    local richest = nil
+    local originalText = analyzeBtn.Text
+    analyzeBtn.Text = "กำลังวิเคราะห์.." -- Preserved user's text
+    analyzeBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+
+    local richestPlayerName = "ไม่พบ"
+    local maxCash = -1
+
+    -- Attempt to find a "leaderstats" or similar folder in players
     for _, p in pairs(Players:GetPlayers()) do
-        local stats = p:FindFirstChild("leaderstats")
-        if stats and stats:FindFirstChild("Cash") then
-            local cash = stats.Cash.Value
-            if type(cash) == "number" and cash > highest then
-                highest = cash
-                richest = p
-            end
-        end
-    end
-    if richest then
-        analyzeBtn.Text = "player ที่รวย : " .. richest.Name -- Preserved user's text
-        analyzeBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-        warn("ANALYZE: Richest player found: " .. richest.Name) -- Debug message
-    else
-        analyzeBtn.Text = "ไม่เจอ player" -- Preserved user's text
-        analyzeBtn.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
-        warn("ANALYZE: No richest player found.") -- Debug message
-    end
-    
-    task.wait(3)
-    analyzeBtn.Text = "ชื่อคนรวยที่สุดในเซิพของมึง" -- Preserved user's text
-    analyzeBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-end)
-
----
-### **SERVER HOP FUNCTIONALITY**
----
-local function serverHop()
-    local originalText = serverhopBtn.Text
-    serverhopBtn.Text = "โปรดรอ.." -- Preserved user's text
-    serverhopBtn.BackgroundColor3 = Color3.fromRGB(255, 165, 0)
-    warn("SERVER HOP: Attempting to find servers.") -- Debug message
-    
-    local function getServers()
-        local servers = {}
-        local success, result = pcall(function()
-            local response = game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100")
-            return HttpService:JSONDecode(response)
-        end)
-        
-        if success and result and result.data then
-            for _, server in ipairs(result.data) do
-                if server.playing and type(server.playing) == "number" and server.id ~= game.JobId then
-                    table.insert(servers, server.id)
-                end
-            end
-            warn("SERVER HOP: Found " .. #servers .. " available servers.") -- Debug message
-        else
-            warn("SERVER HOP: Failed to get server list or decode JSON: " .. tostring(err)) -- Debug message
-        end
-        
-        return servers
-    end
-    
-    local function tryTeleport(servers)
-        if #servers > 0 then
-            serverhopBtn.Text = "รอออ."
-            serverhopBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
-            local randomServerId = servers[math.random(1, #servers)]
-            warn("SERVER HOP: Attempting to teleport to server " .. randomServerId) -- Debug message
-            local success, err = pcall(function() -- Added pcall for teleport
-                TeleportService:TeleportToPlaceInstance(game.PlaceId, randomServerId)
-            end)
-            if not success then
-                warn("SERVER HOP: Teleport failed: " .. tostring(err))
-            end
-        else
-            warn("SERVER HOP: No suitable servers found, retrying...") -- Debug message
-            task.wait(1)
-            servers = getServers()
-            tryTeleport(servers)
-        end
-    end
-    
-    local servers = getServers()
-    tryTeleport(servers)
-    
-    task.delay(5, function()
-        if serverhopBtn then
-            serverhopBtn.Text = originalText
-            serverhopBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        end
-    end)
-end
-
-serverhopBtn.MouseButton1Click:Connect(serverHop)
-
----
-### **MINIMIZE FUNCTIONALITY**
----
-local minimized = false
-minimizeBtn.MouseButton1Click:Connect(function()
-    if minimized then
-        mainFrame:TweenSize(UDim2.new(0, 420, 0, 430), "Out", "Quad", 0.3, true) -- Updated width and height
-        tabFrame.Visible = true
-        if currentTab == "Main" then
-            mainContent.Visible = true
-        elseif currentTab == "99Day" then
-            day99Content.Visible = true
-        elseif currentTab == "ESP" then
-            espContent.Visible = true
-        elseif currentTab == "More" then
-            moreContent.Visible = true
-        end
-        minimizeBtn.Text = "−"
-        warn("GUI minimized: Restored.") -- Debug message
-    else
-        mainFrame:TweenSize(UDim2.new(0, 420, 0, 45), "Out", "Quad", 0.3, true) -- Updated width
-        tabFrame.Visible = false
-        mainContent.Visible = false
-        day99Content.Visible = false
-        espContent.Visible = false
-        moreContent.Visible = false
-        
-        -- Deactivate functionalities when minimized
-        if playerListFrame then playerListFrame.Visible = false end
-        clearPlayerESP()
-        if espAllOn then
-            espAllOn = false
-            espAllBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-            espAllBtn.Text = "ESP"
-            if espAllLoopConnection then
-                espAllLoopConnection:Disconnect()
-                espAllLoopConnection = nil
-            end
-            clearAllESPAll()
-            warn("General ESP deactivated due to minimize.") -- Debug message
-        end
-        if itemVacuumOn then
-            itemVacuumOn = false
-            itemVacuumBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-            itemVacuumBtn.Text = "ดูดของ"
-            if itemVacuumLoopConnection then
-                itemVacuumLoopConnection:Disconnect()
-                itemVacuumLoopConnection = nil
-            end
-            warn("Item Vacuum deactivated due to minimize.") -- Debug message
-        end
-        if removeWallsOn then
-            removeWallsOn = false
-            removeWallsBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-            removeWallsBtn.Text = "ลบกำแพง"
-            local char = player.Character
-            if char then
-                for _, part in pairs(Workspace:GetDescendants()) do
-                    if part:IsA("BasePart") and part.Parent and not Players:GetPlayerFromCharacter(part.Parent) and not part:IsA("Terrain") then
-                        -- Restore only parts that were modified by this script
-                        if originalPartStates[part] then
-                            part.CanCollide = originalPartStates[part].CanCollide
-                            part.Transparency = originalPartStates[part].Transparency
+        local leaderstats = p:FindFirstChild("leaderstats") or p:FindFirstChild("Stats") or p:FindFirstChild("Data")
+        if leaderstats then
+            for _, stat in pairs(leaderstats:GetChildren()) do
+                if stat:IsA("IntValue") or stat:IsA("NumberValue") then
+                    -- Common names for cash/money stats
+                    local statNameLower = stat.Name:lower()
+                    if statNameLower:find("cash") or statNameLower:find("money") or statNameLower:find("coins") or statNameLower:find("points") then
+                        if stat.Value > maxCash then
+                            maxCash = stat.Value
+                            richestPlayerName = p.Name
                         end
                     end
                 end
-                originalPartStates = {} -- Clear states after restoring
             end
-            warn("Remove Walls deactivated due to minimize.") -- Debug message
         end
-        -- "บิน" now just runs a script, so no state to toggle off here when minimizing.
-
-        minimizeBtn.Text = "+"
-        warn("GUI minimized: Collapsed.") -- Debug message
     end
-    minimized = not minimized
+
+    analyzeBtn.Text = "คนรวยที่สุด: " .. richestPlayerName -- Preserved user's text
+    analyzeBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
+
+    -- Reset button text after a few seconds
+    task.delay(5, function()
+        analyzeBtn.Text = originalText
+        analyzeBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    end)
 end)
 
----
-### **DRAG FUNCTIONALITY**
----
-local dragging, dragStart, startPos = false
+-- SERVER HOP FUNCTIONALITY
+serverhopBtn.MouseButton1Click:Connect(function()
+    local originalText = serverhopBtn.Text
+    serverhopBtn.Text = "กำลังรีเซิพ.." -- Preserved user's text
+    serverhopBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
 
-local function beginDrag(input)
-    dragging = true
-    dragStart = input.Position
-    startPos = mainFrame.Position
-    warn("Drag started.") -- Debug message
-end
+    -- Get a list of active servers for the current game
+    local success, err = pcall(function()
+        TeleportService:TeleportToPlaceInstance(game.PlaceId, TeleportService.GetPlayerPlaceInstanceAsync().instanceId)
+    end)
 
-local function updateDrag(input)
-    if dragging then
-        local delta = input.Position - dragStart
-        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    if not success then
+        warn("Failed to server hop: " .. err)
+        serverhopBtn.Text = "รีเซิพไม่สำเร็จ" -- Preserved user's text
+        serverhopBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+        task.delay(2, function()
+            serverhopBtn.Text = originalText
+            serverhopBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        end)
     end
+end)
+
+-- NEW: REMOVE WALLS FUNCTIONALITY
+local wallsRemoved = false
+removeWallsBtn.MouseButton1Click:Connect(function()
+    wallsRemoved = not wallsRemoved
+    if wallsRemoved then
+        removeWallsBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
+        removeWallsBtn.Text = "คืนกำแพง"
+
+        -- Iterate through all parts in the workspace
+        for _, part in pairs(Workspace:GetDescendants()) do
+            if part:IsA("BasePart") and part.CanCollide and part.Transparency < 0.5 then
+                -- Check if it's likely a wall (e.g., larger than a player, not a character part)
+                local isCharacterPart = false
+                local character = player.Character
+                if character then
+                    for _, charPart in pairs(character:GetDescendants()) do
+                        if part == charPart then
+                            isCharacterPart = true
+                            break
+                        end
+                    end
+                end
+
+                if not isCharacterPart and part.Size.Y > 5 and (part.Size.X > 5 or part.Size.Z > 5) then
+                    part.CanCollide = false
+                    part.Transparency = 0.7
+                end
+            end
+        end
+    else
+        removeWallsBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        removeWallsBtn.Text = "ลบกำแพง"
+
+        -- Restore original properties (this is a simple restore, might not be perfect for all cases)
+        -- A more robust solution would store original properties before changing them.
+        for _, part in pairs(Workspace:GetDescendants()) do
+            if part:IsA("BasePart") and part.Transparency > 0.5 then
+                 -- This tries to revert only parts that were likely modified.
+                 -- It's best practice to store original properties if you need perfect restoration.
+                part.CanCollide = true
+                part.Transparency = 0
+            end
+        end
+    end
+end)
+
+-- NEW: WARP TO STATION FUNCTIONALITY
+local stationListFrame -- Declare outside
+local stations = {
+    {"สถานีหลัก", CFrame.new(100, 10, 0)}, -- Example: Replace with actual game coordinates and names
+    {"สถานีป่า", CFrame.new(-200, 50, 300)},
+    {"สถานีภูเขา", CFrame.new(500, 100, -150)},
+    {"สถานีทะเลทราย", CFrame.new(-400, 20, -500)},
+    -- Add more stations as needed
+}
+
+local function updateStationList()
+    -- Clear existing list items
+    for _, child in pairs(stationListScrollingFrame:GetChildren()) do
+        if child:IsA("Frame") and child.Name == "StationEntry" then
+            child:Destroy()
+        end
+    end
+
+    local yOffset = 0
+    for _, stationData in ipairs(stations) do
+        local name = stationData[1]
+        local position = stationData[2]
+
+        local stationEntry = Instance.new("Frame")
+        stationEntry.Name = "StationEntry"
+        stationEntry.Size = UDim2.new(1, 0, 0, 30)
+        stationEntry.Position = UDim2.new(0, 0, 0, yOffset)
+        stationEntry.BackgroundTransparency = 1
+        stationEntry.Parent = stationListScrollingFrame
+
+        local stationNameLabel = Instance.new("TextLabel")
+        stationNameLabel.Size = UDim2.new(0.7, 0, 1, 0)
+        stationNameLabel.Position = UDim2.new(0, 0, 0, 0)
+        stationNameLabel.BackgroundTransparency = 1
+        stationNameLabel.Text = name
+        stationNameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        stationNameLabel.Font = Enum.Font.GothamBold
+        stationNameLabel.TextSize = 14
+        stationNameLabel.TextXAlignment = Enum.TextXAlignment.Left
+        stationNameLabel.Parent = stationEntry
+
+        local warpButton = createModernButton(stationEntry, "Warp", UDim2.new(0.7, 5, 0, 0), UDim2.new(0.3, -5, 0, 30))
+        warpButton.TextSize = 12
+        warpButton.MouseButton1Click:Connect(function()
+            local char = player.Character
+            if char and char:FindFirstChild("HumanoidRootPart") then
+                char.HumanoidRootPart.CFrame = position + Vector3.new(0, 5, 0) -- Warp slightly above target
+            end
+            stationListFrame.Visible = false -- Hide list after warping
+        end)
+
+        yOffset = yOffset + 35 -- Spacing for next entry
+    end
+    stationListScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, yOffset) -- Update canvas size
 end
 
-local function endDrag()
-    dragging = false
-    warn("Drag ended.") -- Debug message
-end
+-- Create the station list sub-frame (hidden initially)
+stationListFrame = Instance.new("Frame", day99Content)
+stationListFrame.Size = UDim2.new(1, 0, 1, -100) -- Adjusted size to fit below buttons
+stationListFrame.Position = UDim2.new(0, 0, 0, 145) -- Position below warp buttons and new station button
+stationListFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+stationListFrame.BorderSizePixel = 0
+stationListFrame.Visible = false
+local stationListCorner = Instance.new("UICorner", stationListFrame)
+stationListCorner.CornerRadius = UDim.new(0, 10)
+
+local stationListScrollingFrame = Instance.new("ScrollingFrame", stationListFrame)
+stationListScrollingFrame.Size = UDim2.new(1, 0, 1, -30) -- Leave space for close button
+stationListScrollingFrame.Position = UDim2.new(0, 0, 0, 0)
+stationListScrollingFrame.BackgroundTransparency = 1
+stationListScrollingFrame.CanvasSize = UDim2.new(0, 0, 0, 0) -- Will be updated dynamically
+stationListScrollingFrame.ScrollBarThickness = 6
+stationListScrollingFrame.VerticalScrollBarInset = Enum.ScrollBarInset.Always
+
+
+local stationListCloseBtn = createModernButton(stationListFrame, "ปิด", UDim2.new(0, 0, 1, -30), UDim2.new(1, 0, 0, 30))
+stationListCloseBtn.MouseButton1Click:Connect(function()
+    stationListFrame.Visible = false
+end)
+
+warpToStationBtn.MouseButton1Click:Connect(function()
+    stationListFrame.Visible = true
+    updateStationList()
+end)
+
+
+-- Initial tab setup
+switchTab("Main")
+
+-- Draggable functionality for mainFrame
+local dragging
+local dragInput
+local dragStart
+local startPos
 
 titleBar.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        beginDrag(input)
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.Ended then
+                dragging = false
+            end
+        end)
     end
 end)
 
 titleBar.InputChanged:Connect(function(input)
-    if dragging then
-        updateDrag(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        if dragging then
+            local delta = input.Position - dragStart
+            mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
     end
 end)
 
-titleBar.InputEnded:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-        endDrag()
-    end
+minimizeBtn.MouseButton1Click:Connect(function()
+    screenGui.Enabled = not screenGui.Enabled
 end)
 
--- Initial tab switch to ensure correct active state
-switchTab("Main")
-warn("HurryGUI script loaded and initialized.") -- Debug message on script load
+-- Cleanup on gui removal
+screenGui.ParentChanged:Connect(function()
+    if not screenGui.Parent then
+        clearESP()
+        clearAllESP2()
+        clearPlayerESP()
+        if esp2LoopConnection then
+            esp2LoopConnection:Disconnect()
+            esp2LoopConnection = nil
+        end
+        if floatForce then floatForce:Destroy() end
+    end
+end)
