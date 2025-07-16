@@ -82,10 +82,10 @@ local function createModernTab(parent, text, position, sizeX)
 end
 
 -- Adjusted tab positions and sizes for 4 tabs
-local mainTab = createModernTab(tabFrame, "หน้าแรก", UDim2.new(0, 0, 0, 0), 0.25)
-local day99Tab = createModernTab(tabFrame, "99 day", UDim2.new(0.25, 3, 0, 0), 0.25)
-local espTab = createModernTab(tabFrame, "Eps", UDim2.new(0.5, 6, 0, 0), 0.25)
-local moreTab = createModernTab(tabFrame, "เพิ่มเติม", UDim2.new(0.75, 9, 0, 0), 0.25)
+local mainTab = createModernTab(tabFrame, "หน้าแรก", UDim2.new(0, 0, 0, 0), 0.25) -- Preserved user's text
+local day99Tab = createModernTab(tabFrame, "99 day", UDim2.new(0.25, 3, 0, 0), 0.25) -- New tab
+local espTab = createModernTab(tabFrame, "Eps", UDim2.new(0.5, 6, 0, 0), 0.25) -- Preserved user's text
+local moreTab = createModernTab(tabFrame, "เพิ่มเติม", UDim2.new(0.75, 9, 0, 0), 0.25) -- Preserved user's text
 
 -- Content Frames for each tab - adjusted height to fit optimized frame
 local mainContent = Instance.new("Frame", mainFrame)
@@ -94,7 +94,7 @@ mainContent.Position = UDim2.new(0, 10, 0, 95)
 mainContent.BackgroundTransparency = 1
 mainContent.Visible = true
 
-local day99Content = Instance.new("Frame", mainFrame)
+local day99Content = Instance.new("Frame", mainFrame) -- New content frame
 day99Content.Size = UDim2.new(1, -20, 1, -100)
 day99Content.Position = UDim2.new(0, 10, 0, 95)
 day99Content.BackgroundTransparency = 1
@@ -142,11 +142,11 @@ local function createModernButton(parent, text, position, size)
 end
 
 -- Main Tab Buttons with tighter spacing
-local stealBtn = createModernButton(mainContent, "ขโมย(มีโอกาสได้)", UDim2.new(0, 0, 0, 0))
-local floatBtn = createModernButton(mainContent, "ลอย", UDim2.new(0, 0, 0, 50))
-local freecamBtn = createModernButton(mainContent, "กล้อง📷", UDim2.new(0, 0, 0, 100))
-local antikickBtn = createModernButton(mainContent, "auto kick (อย่าใช้บัค)", UDim2.new(0, 0, 0, 150))
-local godmodeBtn = createModernButton(mainContent, "God mode", UDim2.new(0, 0, 0, 200))
+local stealBtn = createModernButton(mainContent, "ขโมย(มีโอกาสได้)", UDim2.new(0, 0, 0, 0)) -- Preserved user's text
+local floatBtn = createModernButton(mainContent, "ลอย", UDim2.new(0, 0, 0, 50)) -- Preserved user's text
+local freecamBtn = createModernButton(mainContent, "กล้อง📷", UDim2.new(0, 0, 0, 100)) -- Preserved user's text
+local antikickBtn = createModernButton(mainContent, "auto kick (อย่าใช้บัค)", UDim2.new(0, 0, 0, 150)) -- Preserved user's text
+local godmodeBtn = createModernButton(mainContent, "God mode", UDim2.new(0, 0, 0, 200)) -- Preserved user's text
 
 -- 99 Day Tab Buttons
 local warpToCapBtn = createModernButton(day99Content, "วาปไปยังแคป", UDim2.new(0, 0, 0, 0))
@@ -154,12 +154,12 @@ local warpToPlayerBtn = createModernButton(day99Content, "การวาปไ�
 local warpToStationBtn = createModernButton(day99Content, "วาปไปยังสถานีต่าง ๆ", UDim2.new(0, 0, 0, 100)) -- NEW BUTTON
 
 -- ESP Tab Button
-local espBtn = createModernButton(espContent, "แสดงชื่อ Player", UDim2.new(0, 0, 0, 0))
-local esp2Btn = createModernButton(espContent, "แสดงชื่อมอนเตอร์", UDim2.new(0, 0, 0, 50))
+local espBtn = createModernButton(espContent, "แสดงชื่อ Player", UDim2.new(0, 0, 0, 0)) -- Preserved user's text
+local esp2Btn = createModernButton(espContent, "แสดงชื่อมอนเตอร์", UDim2.new(0, 0, 0, 50)) -- Updated ESP 2 button text
 
 -- More Tab Buttons with tighter spacing
-local analyzeBtn = createModernButton(moreContent, "ชื่อคนรวยที่สุดในเซิพของมึง", UDim2.new(0, 0, 0, 0))
-local serverhopBtn = createModernButton(moreContent, "รีเซิพ", UDim2.new(0, 0, 0, 50))
+local analyzeBtn = createModernButton(moreContent, "ชื่อคนรวยที่สุดในเซิพของมึง", UDim2.new(0, 0, 0, 0)) -- Preserved user's text
+local serverhopBtn = createModernButton(moreContent, "รีเซิพ", UDim2.new(0, 0, 0, 50)) -- Preserved user's text
 local removeWallsBtn = createModernButton(moreContent, "ลบกำแพง", UDim2.new(0, 0, 0, 100)) -- NEW BUTTON
 
 -- Credits label in More tab - moved up to eliminate space
@@ -183,8 +183,8 @@ local function switchTab(tab)
     
     mainTab.BackgroundColor3 = inactiveColor
     mainTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-    day99Tab.BackgroundColor3 = inactiveColor
-    day99Tab.TextColor3 = Color3.fromRGB(255, 255, 255)
+    day99Tab.BackgroundColor3 = inactiveColor -- New tab
+    day99Tab.TextColor3 = Color3.fromRGB(255, 255, 255) -- New tab
     espTab.BackgroundColor3 = inactiveColor
     espTab.TextColor3 = Color3.fromRGB(255, 255, 255)
     moreTab.BackgroundColor3 = inactiveColor
@@ -192,7 +192,7 @@ local function switchTab(tab)
     
     -- Hide all content frames
     mainContent.Visible = false
-    day99Content.Visible = false
+    day99Content.Visible = false -- New tab
     espContent.Visible = false
     moreContent.Visible = false
     
@@ -226,7 +226,7 @@ local function switchTab(tab)
         mainTab.BackgroundColor3 = activeColor
         mainTab.TextColor3 = Color3.fromRGB(255, 255, 255)
         mainContent.Visible = true
-    elseif tab == "99Day" then
+    elseif tab == "99Day" then -- New tab logic
         day99Tab.BackgroundColor3 = activeColor
         day99Tab.TextColor3 = Color3.fromRGB(255, 255, 255)
         day99Content.Visible = true
@@ -244,14 +244,14 @@ local function switchTab(tab)
 end
 
 mainTab.MouseButton1Click:Connect(function() switchTab("Main") end)
-day99Tab.MouseButton1Click:Connect(function() switchTab("99Day") end)
+day99Tab.MouseButton1Click:Connect(function() switchTab("99Day") end) -- New tab connection
 espTab.MouseButton1Click:Connect(function() switchTab("ESP") end)
 moreTab.MouseButton1Click:Connect(function() switchTab("More") end)
 
 -- STEAL BUTTON FUNCTIONALITY
 stealBtn.MouseButton1Click:Connect(function()
     local originalText = stealBtn.Text
-    stealBtn.Text = "กำลังขโมยคับ โปรดรอ.."
+    stealBtn.Text = "กำลังขโมยคับ โปรดรอ.." -- Preserved user's text
     stealBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
     
     local char = player.Character
@@ -296,7 +296,7 @@ floatBtn.MouseButton1Click:Connect(function()
     if floatOn then
         if floatForce then floatForce:Destroy() end
         floatBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        floatBtn.Text = "ลอย"
+        floatBtn.Text = "ลอย" -- Preserved user's text
     else
         floatForce = Instance.new("BodyVelocity")
         floatForce.Velocity = Vector3.new(0, 20, 0)
@@ -304,7 +304,7 @@ floatBtn.MouseButton1Click:Connect(function()
         floatForce.P = 1000
         floatForce.Parent = root
         floatBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-        floatBtn.Text = "ปิดลอย"
+        floatBtn.Text = "ปิดลอย" -- Preserved user's text
     end
     floatOn = not floatOn
 end)
@@ -319,7 +319,7 @@ end)
 -- ANTI-KICK FUNCTIONALITY
 antikickBtn.MouseButton1Click:Connect(function()
     local originalText = antikickBtn.Text
-    antikickBtn.Text = "รอ.."
+    antikickBtn.Text = "รอ.." -- Preserved user's text
     antikickBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
     
     pcall(function()
@@ -327,7 +327,7 @@ antikickBtn.MouseButton1Click:Connect(function()
     end)
     
     task.wait(1)
-    antikickBtn.Text = "บัคอยู่"
+    antikickBtn.Text = "บัคอยู่" -- Preserved user's text
     antikickBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
 end)
 
@@ -358,7 +358,7 @@ godmodeBtn.MouseButton1Click:Connect(function()
         end)
         
         -- Visual feedback
-        godmodeBtn.Text = "เปิดโหมดแล้ว🤡"
+        godmodeBtn.Text = "เปิดโหมดแล้ว🤡" -- Preserved user's text
         godmodeBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
     else
         -- Disable god mode
@@ -366,7 +366,7 @@ godmodeBtn.MouseButton1Click:Connect(function()
         humanoid.Health = 100
         
         -- Visual feedback
-        godmodeBtn.Text = "God mode"
+        godmodeBtn.Text = "God mode" -- Preserved user's text
         godmodeBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
     end
 end)
@@ -433,7 +433,7 @@ end
 
 local function updatePlayerList()
     -- Clear existing list items
-    for _, child in pairs(playerListScrollingFrame:GetChildren()) do
+    for _, child in pairs(playerListFrame:GetChildren()) do
         if child:IsA("Frame") and child.Name == "PlayerEntry" then
             child:Destroy()
         end
@@ -593,10 +593,10 @@ espBtn.MouseButton1Click:Connect(function()
     espOn = not espOn
     if espOn then
         espBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
-        espBtn.Text = "ปิดชื่อ Player"
+        espBtn.Text = "ปิดชื่อ Player" -- Preserved user's text
     else
         espBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        espBtn.Text = "แสดงชื่อ Player"
+        espBtn.Text = "แสดงชื่อ Player" -- Preserved user's text
     end
     updatePlayerESP()
 end)
@@ -711,7 +711,7 @@ end)
 -- ANALYZE BUTTON FUNCTIONALITY
 analyzeBtn.MouseButton1Click:Connect(function()
     local originalText = analyzeBtn.Text
-    analyzeBtn.Text = "กำลังวิเคราะห์.."
+    analyzeBtn.Text = "กำลังวิเคราะห์.." -- Preserved user's text
     analyzeBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
 
     local richestPlayerName = "ไม่พบ"
@@ -736,10 +736,10 @@ analyzeBtn.MouseButton1Click:Connect(function()
         end
     end
 
-    analyzeBtn.Text = "คนรวยที่สุด: " .. richestPlayerName
+    analyzeBtn.Text = "คนรวยที่สุด: " .. richestPlayerName -- Preserved user's text
     analyzeBtn.BackgroundColor3 = Color3.fromRGB(0, 255, 127)
 
-    -- Reset button after a few seconds
+    -- Reset button text after a few seconds
     task.delay(5, function()
         analyzeBtn.Text = originalText
         analyzeBtn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -749,7 +749,7 @@ end)
 -- SERVER HOP FUNCTIONALITY
 serverhopBtn.MouseButton1Click:Connect(function()
     local originalText = serverhopBtn.Text
-    serverhopBtn.Text = "กำลังรีเซิพ.."
+    serverhopBtn.Text = "กำลังรีเซิพ.." -- Preserved user's text
     serverhopBtn.BackgroundColor3 = Color3.fromRGB(138, 43, 226)
 
     -- Get a list of active servers for the current game
@@ -759,7 +759,7 @@ serverhopBtn.MouseButton1Click:Connect(function()
 
     if not success then
         warn("Failed to server hop: " .. err)
-        serverhopBtn.Text = "รีเซิพไม่สำเร็จ"
+        serverhopBtn.Text = "รีเซิพไม่สำเร็จ" -- Preserved user's text
         serverhopBtn.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
         task.delay(2, function()
             serverhopBtn.Text = originalText
@@ -768,9 +768,7 @@ serverhopBtn.MouseButton1Click:Connect(function()
     end
 end)
 
----
-### **ฟังก์ชัน "ลบกำแพง" (Remove Walls) - ปรับปรุงไม่ให้ลบหญ้า**
----
+-- NEW: REMOVE WALLS FUNCTIONALITY
 local wallsRemoved = false
 removeWallsBtn.MouseButton1Click:Connect(function()
     wallsRemoved = not wallsRemoved
@@ -781,40 +779,21 @@ removeWallsBtn.MouseButton1Click:Connect(function()
         -- Iterate through all parts in the workspace
         for _, part in pairs(Workspace:GetDescendants()) do
             if part:IsA("BasePart") and part.CanCollide and part.Transparency < 0.5 then
-                -- Add checks to avoid grass or terrain by Material or Name
-                local isTerrainMaterial = (part.Material == Enum.Material.Grass or
-                                           part.Material == Enum.Material.LeafyGrass or
-                                           part.Material == Enum.Material.Slate or
-                                           part.Material == Enum.Material.Sand or
-                                           part.Material == Enum.Material.Concrete or
-                                           part.Material == Enum.Material.Rock or
-                                           part.Material == Enum.Material.Ground)
-                
-                local nameLower = part.Name:lower()
-                local isNamedTerrain = (nameLower:find("terrain") or 
-                                        nameLower:find("ground") or 
-                                        nameLower:find("grass") or
-                                        nameLower:find("tree") or -- Also avoid trees
-                                        nameLower:find("bush") or -- And bushes
-                                        nameLower:find("foliage")) -- And foliage
-
-                if not isTerrainMaterial and not isNamedTerrain then
-                    -- Check if it's likely a wall (e.g., larger than a player, not a character part)
-                    local isCharacterPart = false
-                    local character = player.Character
-                    if character then
-                        for _, charPart in pairs(character:GetDescendants()) do
-                            if part == charPart then
-                                isCharacterPart = true
-                                break
-                            end
+                -- Check if it's likely a wall (e.g., larger than a player, not a character part)
+                local isCharacterPart = false
+                local character = player.Character
+                if character then
+                    for _, charPart in pairs(character:GetDescendants()) do
+                        if part == charPart then
+                            isCharacterPart = true
+                            break
                         end
                     end
+                end
 
-                    if not isCharacterPart and part.Size.Y > 5 and (part.Size.X > 5 or part.Size.Z > 5) then
-                        part.CanCollide = false
-                        part.Transparency = 0.7
-                    end
+                if not isCharacterPart and part.Size.Y > 5 and (part.Size.X > 5 or part.Size.Z > 5) then
+                    part.CanCollide = false
+                    part.Transparency = 0.7
                 end
             end
         end
@@ -835,17 +814,14 @@ removeWallsBtn.MouseButton1Click:Connect(function()
     end
 end)
 
----
-### **ฟังก์ชัน "วาปไปยังสถานีต่าง ๆ" (Warp to Different Stations)**
----
+-- NEW: WARP TO STATION FUNCTIONALITY
 local stationListFrame -- Declare outside
 local stations = {
-    {"สถานีหลัก", CFrame.new(100, 10, 0)}, -- ตัวอย่าง: แทนที่ด้วยพิกัดจริงในเกมของคุณ
+    {"สถานีหลัก", CFrame.new(100, 10, 0)}, -- Example: Replace with actual game coordinates and names
     {"สถานีป่า", CFrame.new(-200, 50, 300)},
     {"สถานีภูเขา", CFrame.new(500, 100, -150)},
     {"สถานีทะเลทราย", CFrame.new(-400, 20, -500)},
-    -- เพิ่มสถานีอื่นๆ ได้ตามต้องการ
-    -- {"ชื่อสถานีของคุณ", CFrame.new(X, Y, Z)},
+    -- Add more stations as needed
 }
 
 local function updateStationList()
@@ -934,7 +910,7 @@ local dragStart
 local startPos
 
 titleBar.InputBegan:Connect(function(input)
-    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType.Touch then
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
         dragging = true
         dragStart = input.Position
         startPos = mainFrame.Position
